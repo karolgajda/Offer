@@ -11,7 +11,7 @@ public class UserFactory {
 
 
     public User create(String password) {
-        return new User(generator.generate(), password);
+        return User.create(generator.generate(), password);
     }
 
 }

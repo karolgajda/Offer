@@ -1,22 +1,28 @@
 package pl.karol.administration.user.domain.model;
 
+import lombok.AccessLevel;
+import lombok.Setter;
 import pl.karol.administration.user.domain.event.ChangePasswordEvent;
-import pl.karol.administration.user.domain.event.CreateUserEvent;
+import pl.karol.administration.user.domain.event.NewUserEvent;
 import pl.karol.common.application.event.publisher.DomainEventPublisher;
 import pl.karol.common.domain.model.Entity;
 
-
+@Setter(value = AccessLevel.PRIVATE)
 public class User extends Entity {
 
     private String userId;
     private String encodedPassword;
 
-    public User(String userId, String encodedPassword) {
-        this.userId = userId;
-        this.encodedPassword = encodedPassword;
+    private User(String userId, String encodedPassword) {
+        setUserId(userId);
+        setEncodedPassword(encodedPassword);
         DomainEventPublisher
                 .getInstance()
-                .publish(CreateUserEvent.create(userId));
+                .publish(NewUserEvent.create(userId));
+    }
+
+    public static User create(String userId, String encodedPassword) {
+        return new User(userId, encodedPassword);
     }
 
     public boolean isPasswordEquals(String password) {

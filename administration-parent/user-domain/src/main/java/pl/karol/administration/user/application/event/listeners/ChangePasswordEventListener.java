@@ -7,7 +7,6 @@ import pl.karol.common.domain.event.DomainEvent;
 
 public class ChangePasswordEventListener implements DomainEventListener {
 
-
     @Override
     public boolean canHandle(Class<?> eventClass) {
         return eventClass == ChangePasswordEvent.class;

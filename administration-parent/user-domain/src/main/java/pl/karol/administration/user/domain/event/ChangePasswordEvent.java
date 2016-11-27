@@ -7,9 +7,7 @@ public class ChangePasswordEvent extends AbstractDomainEvent {
 
     private final String userId;
 
-
-    public ChangePasswordEvent(String userId) {
-        super();
+    private ChangePasswordEvent(String userId) {
         this.userId = userId;
     }
 

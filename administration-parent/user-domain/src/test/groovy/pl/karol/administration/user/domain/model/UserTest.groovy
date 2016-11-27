@@ -1,7 +1,7 @@
 package pl.karol.administration.user.domain.model
 
 import pl.karol.administration.user.application.event.listeners.ChangePasswordEventListener
-import pl.karol.administration.user.application.event.listeners.CreateUserEventListener
+import pl.karol.administration.user.application.event.listeners.NewUserEventListener
 import pl.karol.administration.user.factory.UserFactory
 import pl.karol.common.application.IDGeneratorImpl
 import pl.karol.common.application.event.publisher.DomainEventPublisher
@@ -19,7 +19,7 @@ class UserTest extends Specification {
     def setup() {
         password = "password";
 
-        createListener = Spy(CreateUserEventListener)
+        createListener = Spy(NewUserEventListener)
         DomainEventPublisher.addSubscriber(createListener)
 
         changeListener = Spy(ChangePasswordEventListener)
