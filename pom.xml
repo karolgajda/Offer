@@ -17,6 +17,8 @@
     <modules>
         <module>domain-common</module>
         <module>administration-parent</module>
+        <module>dictionary-parent</module>
+        <module>dictionary-parent/dictionary-domain</module>
     </modules>
 
     <dependencyManagement>
