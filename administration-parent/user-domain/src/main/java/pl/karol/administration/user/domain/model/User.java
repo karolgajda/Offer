@@ -40,7 +40,7 @@ public class User extends Entity {
         setEncodedPassword(encodedPassword);
         DomainEventPublisher
                 .getInstance()
-                .publish(ChangePasswordEvent.create(id));
+                .publish(ChangePasswordEvent.create(getId()));
     }
 
     private void setEncodedPassword(String encodedPassword) {
@@ -53,7 +53,7 @@ public class User extends Entity {
         this.skills.addAll(skills);
         DomainEventPublisher
                 .getInstance()
-                .publish(NewSkillEvent.create(id, skills));
+                .publish(NewSkillEvent.create(getId(), skills));
     }
 
     public void removeSkills(Collection<String> skills) {
@@ -61,7 +61,7 @@ public class User extends Entity {
         this.skills.removeAll(skills);
         DomainEventPublisher
                 .getInstance()
-                .publish(RemoveSkillEvent.create(id, skills));
+                .publish(RemoveSkillEvent.create(getId(), skills));
     }
 
     public void isUserGotSkill(String skill) {

@@ -4,10 +4,14 @@ import pl.karol.common.utils.Asserts;
 
 public abstract class Entity extends IdentifiedDomainObject {
 
-    protected String id;
+    private String id;
 
     public Entity(String id) {
         setId(id);
+    }
+
+    protected String getId() {
+        return this.id;
     }
 
     private void setId(String id) {
