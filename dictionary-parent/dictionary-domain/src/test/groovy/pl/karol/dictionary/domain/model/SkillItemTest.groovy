@@ -2,9 +2,9 @@ package pl.karol.dictionary.domain.model
 
 import pl.karol.common.application.IDGeneratorImpl
 import pl.karol.common.application.exception.AssertOfferRuntimeException
-import pl.karol.dictionary.factory.SkillDictionaryFactory
+import pl.karol.dictionary.domain.model.factory.SkillDictionaryFactory
 
-class SkillDictionaryTest extends spock.lang.Specification {
+class SkillItemTest extends spock.lang.Specification {
     def skillDictionaryFactory
 
 

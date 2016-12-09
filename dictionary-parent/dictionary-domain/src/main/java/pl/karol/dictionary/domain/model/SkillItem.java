@@ -6,12 +6,12 @@ import pl.karol.common.utils.Asserts;
 import java.util.Collection;
 import java.util.HashSet;
 
-public class SkillDictionary extends Entity {
+public class SkillItem extends Entity {
 
     private String code;
-    private Collection<SkillDictionary> items;
+    private Collection<SkillItem> items;
 
-    public SkillDictionary(String id, String code) {
+    public SkillItem(String id, String code) {
         super(id);
         setCode(code);
         this.items = new HashSet<>();
@@ -22,12 +22,12 @@ public class SkillDictionary extends Entity {
         this.code = code;
     }
 
-    public void addItems(Collection<SkillDictionary> items) {
+    public void addItems(Collection<SkillItem> items) {
         Asserts.notNull(items);
         this.items.addAll(items);
     }
 
-    public boolean isItemExist(SkillDictionary item) {
+    public boolean isItemExist(SkillItem item) {
         return this.items.contains(item);
     }
 
