@@ -5,7 +5,7 @@ import pl.karol.common.application.IDGenerator;
 import pl.karol.dictionary.domain.model.SkillItem;
 
 @AllArgsConstructor
-public class SkillDictionaryFactory {
+public final class SkillDictionaryFactory {
 
     private final IDGenerator idGenerator;
 

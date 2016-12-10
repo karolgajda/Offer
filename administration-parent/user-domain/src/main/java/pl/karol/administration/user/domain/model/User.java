@@ -67,21 +67,4 @@ public class User extends Entity {
     public void isUserGotSkill(String skill) {
         this.skills.contains(skill);
     }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-        return super.equals(obj);
-    }
 }
