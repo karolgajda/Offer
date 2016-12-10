@@ -1,13 +1,14 @@
 package pl.karol.dictionary.application.usecase
 
 import pl.karol.common.application.IDGeneratorImpl
+import pl.karol.common.application.exception.NotFoundElementRuntimeException
+import pl.karol.common.application.exception.ValidatorRuntimeException
 import pl.karol.dictionary.application.dto.CreateNewSkillItemDTO
 import pl.karol.dictionary.application.repository.port.SkillDictionaryRepository
 import pl.karol.dictionary.application.usecase.factory.UseCaseDictionaryFactory
 import pl.karol.dictionary.domain.model.SkillItem
 import pl.karol.dictionary.domain.model.factory.SkillDictionaryFactory
 import spock.lang.Specification
-
 
 class CreateNewSkillItemTest extends Specification {
     def dictionaryRepository
@@ -19,7 +20,6 @@ class CreateNewSkillItemTest extends Specification {
         skillDictionaryFactory = new SkillDictionaryFactory(new IDGeneratorImpl())
         useCaseDictionaryFactory = new UseCaseDictionaryFactory(dictionaryRepository, skillDictionaryFactory)
 
-
     }
 
     def "create new root item"() {
@@ -28,7 +28,7 @@ class CreateNewSkillItemTest extends Specification {
         def createNewSkillItemDTO = CreateNewSkillItemDTO.builder()
                 .code("root")
                 .build();
-        def createNewSkill = useCaseDictionaryFactory.createNewSkill(createNewSkillItemDTO);
+        def createNewSkill = useCaseDictionaryFactory.createNewSkill(createNewSkillItemDTO)
 
         when:
         createNewSkill.execute()
@@ -41,12 +41,11 @@ class CreateNewSkillItemTest extends Specification {
 
     def "create new item as child"() {
         setup:
-        def skillItem
         def createNewSkillItemDTO = CreateNewSkillItemDTO.builder()
                 .code("child")
                 .parentId("1")
-                .build();
-        def createNewSkill = useCaseDictionaryFactory.createNewSkill(createNewSkillItemDTO);
+                .build()
+        def createNewSkill = useCaseDictionaryFactory.createNewSkill(createNewSkillItemDTO)
 
         def parent = new SkillItem("1", "root")
         dictionaryRepository.findById(_) >> Optional.of(parent)
@@ -56,5 +55,34 @@ class CreateNewSkillItemTest extends Specification {
 
         then:
         parent.items.size() == 1
+    }
+
+    def "not found exception when nod find parent"() {
+        setup:
+        def createNewSkillItemDTO = CreateNewSkillItemDTO.builder()
+                .code("child")
+                .parentId("1")
+                .build()
+        def createNewSkill = useCaseDictionaryFactory.createNewSkill(createNewSkillItemDTO)
+
+        dictionaryRepository.findById(_) >> Optional.empty()
+
+        when:
+        createNewSkill.execute()
+
+        then:
+        thrown(NotFoundElementRuntimeException.class)
+    }
+
+    def "validation test"() {
+        setup:
+        def createNewSkillItemDTO = CreateNewSkillItemDTO.builder().build()
+        def createNewSkill = useCaseDictionaryFactory.createNewSkill(createNewSkillItemDTO)
+
+        when:
+        createNewSkill.execute()
+
+        then:
+        thrown(ValidatorRuntimeException)
     }
 }

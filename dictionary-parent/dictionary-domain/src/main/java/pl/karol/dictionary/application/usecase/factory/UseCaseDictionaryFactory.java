@@ -7,12 +7,12 @@ import pl.karol.dictionary.application.usecase.CreateNewSkillItem;
 import pl.karol.dictionary.domain.model.factory.SkillDictionaryFactory;
 
 @AllArgsConstructor
-public class UseCaseDictionaryFactory {
+public final class UseCaseDictionaryFactory {
 
     private final SkillDictionaryRepository dictionaryRepository;
     private final SkillDictionaryFactory skillDictionaryFactory;
 
-    public CreateNewSkillItem createNewSkill(CreateNewSkillItemDTO dto){
-        return new CreateNewSkillItem(dictionaryRepository,skillDictionaryFactory,dto);
+    public CreateNewSkillItem createNewSkill(CreateNewSkillItemDTO dto) {
+        return new CreateNewSkillItem(dictionaryRepository, skillDictionaryFactory, dto);
     }
 }

@@ -1,17 +1,11 @@
 package pl.karol.administration.user.domain.event;
 
 
+import lombok.RequiredArgsConstructor;
 import pl.karol.common.domain.event.AbstractDomainEvent;
 
+@RequiredArgsConstructor(staticName = "create")
 public class ChangePasswordEvent extends AbstractDomainEvent {
 
     private final String userId;
-
-    private ChangePasswordEvent(String userId) {
-        this.userId = userId;
-    }
-
-    public static ChangePasswordEvent create(String userId) {
-        return new ChangePasswordEvent(userId);
-    }
 }

@@ -30,20 +30,4 @@ public class SkillItem extends Entity {
     public boolean isItemExist(SkillItem item) {
         return this.items.contains(item);
     }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-        return super.equals(obj);
-    }
 }
